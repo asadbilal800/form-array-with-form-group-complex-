@@ -1,0 +1,34 @@
+<form [formGroup]="form">
+<label>user name: </label>
+<input fomControlName='username' type="text" [value]="this.form.get('username')?.value">
+<div formArrayName="websites">
+<div *ngFor="let singleWebsite of formArray.controls; let i = index"
+[formGroupName]="i"
+>
+  <ng-container *ngIf="formArray.length == i + 1">
+    <label> Add a new Website </label>
+    <input
+      #websiteInput
+      (input)="changeWebsite(websiteInput.value, i)"
+      formControlName="Link"
+      type="text"
+      placeholder="Add website link"
+    />
+  </ng-container>
+
+  <ng-container *ngIf="formArray.length > i + 1">
+    <label> Website {{ i + 1 }} </label>
+    <input
+      #websiteInput
+      (input)="changeWebsite(websiteInput.value, i)"
+      formControlName="Link"
+      type="text"
+      placeholder="Add website link"
+      [id]="'website' + i"
+    />
+  </ng-container>
+</div>
+</div>
+</form>
+
+<p>result:<br><br><br> {{formArray.value | json}} </p>
