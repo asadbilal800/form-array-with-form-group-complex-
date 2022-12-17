@@ -26,7 +26,16 @@
       placeholder="Add website link"
       [id]="'website' + i"
     />
+    <br>
+    <label>link array {{i + 1}} </label>
+    <div formArrayName='LinkArray'>
+    <div *ngFor="let singleLinkArray of formLinkArray(i).controls; let j = index">
+      <input [formControlName]="j" type="text" />
+    </div>
+    </div>
+
   </ng-container>
+  
 </div>
 </div>
 </form>
